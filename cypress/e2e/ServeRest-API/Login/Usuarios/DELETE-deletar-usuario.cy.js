@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Deletar usuário', () => {
+describe('Deletar um usuário', () => {
 
     it('Deletar um usuário existente', () => {
         cy.criarUsuario().then((response) => {

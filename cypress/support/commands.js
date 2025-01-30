@@ -1,11 +1,9 @@
 import { faker } from '@faker-js/faker/locale/pt_BR'
 
-//Realizar login POST
-
 Cypress.Commands.add('realizarLogin', (userData = null) => {
     const data = userData || {
-        email: 'Nataniel57@hotmail.com',
-        password: 'zqsl1jrZwqUYA4x',
+        email: 'Kleber.Xavier@bol.com.br',
+        password: 'Ik33bdzjvwf09EY',
     }
 
     return cy.request({
@@ -20,7 +18,6 @@ Cypress.Commands.add('realizarLogin', (userData = null) => {
     })
 })
 
-//Realizar login com credenciais erradas POST
 
 Cypress.Commands.add('realizarLoginIncorreto', (userData = null) => {
     const data = userData || {
@@ -41,7 +38,6 @@ Cypress.Commands.add('realizarLoginIncorreto', (userData = null) => {
 })
 
 
-//Cadastrar usuário POST
 
 Cypress.Commands.add('criarUsuario', (userData = null) => {
     const data = userData || {
@@ -63,30 +59,6 @@ Cypress.Commands.add('criarUsuario', (userData = null) => {
     })
 })   
 
-//Cadastrar usuário com email já utilizado POST
-
-Cypress.Commands.add('novoUsuario', (userData = null) => {
-    const data = userData || {
-        nome: faker.person.fullName(),
-        email: 'Pedro.Martins@gmail.com',
-        password: faker.internet.password(),
-        administrador: faker.datatype.boolean().toString()
-    }
-
-    return cy.request({
-        method: 'POST',
-        url: 'https://serverest.dev/usuarios',
-        headers: {
-            accept: 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: data,
-        failOnStatusCode: false
-    })
-})
-
-
-//Listar usuários GET
 
 Cypress.Commands.add('listarUsuario', () => {
      cy.request({
@@ -100,8 +72,6 @@ Cypress.Commands.add('listarUsuario', () => {
 })
 
 
-//Pegar usuário pelo Id GET
-
 Cypress.Commands.add('listById', (userId) => {
      cy.request({
         method: 'GET',
@@ -113,8 +83,6 @@ Cypress.Commands.add('listById', (userId) => {
     })
 })
 
-
-//Editar usuário PUT
 
 Cypress.Commands.add('updateUser', (userId, userData = null) => {
     const data = userData || {
@@ -136,7 +104,6 @@ Cypress.Commands.add('updateUser', (userId, userData = null) => {
     })
 })   
 
-//Deletar usuário
 
 Cypress.Commands.add('listByIdDelete', (userId) => {
     cy.request({

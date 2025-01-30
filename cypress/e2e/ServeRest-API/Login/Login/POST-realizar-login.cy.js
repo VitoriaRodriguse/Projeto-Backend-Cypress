@@ -3,7 +3,7 @@
 describe('Login', () => {
 
     it('Realizar Login', () => {
-        cy.criarUsuario().then((response) => {
+        cy.criarUsuario().then(() => {
             cy.realizarLogin().then((response) => {
                 expect(response.status).to.eq(200)
                 expect(response.body).to.have.property('message', 'Login realizado com sucesso')

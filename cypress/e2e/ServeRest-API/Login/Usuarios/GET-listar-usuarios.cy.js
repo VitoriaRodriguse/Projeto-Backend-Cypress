@@ -18,7 +18,8 @@ describe('Login', () => {
             expect(firstUser).to.have.property('email')
             expect(firstUser).to.have.property('password')
             expect(firstUser).to.have.property('administrador')
-        
+            expect(firstUser).to.have.property('_id')
+
         })
     })
 })    

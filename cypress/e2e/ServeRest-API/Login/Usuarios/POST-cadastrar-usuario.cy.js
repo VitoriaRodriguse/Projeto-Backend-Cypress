@@ -13,21 +13,7 @@ describe('Login', () => {
     })
 
     it('Cadastrar usuário com email já usado', () => {
-        cy.request({
-            method: 'POST',
-            url: 'https://serverest.dev/usuarios',
-            headers: {
-                accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: {
-                nome: faker.person.fullName(),
-                email: 'Caua7@bol.com.br',
-                password: faker.internet.password(),
-                administrador: faker.datatype.boolean().toString()
-            },
-            failOnStatusCode: false
-        }).then((response) => {
+        cy.emailUsado().then((response) => {
             expect(response.status).to.eq(400)
             expect(response.body).to.have.property('message', 'Este email já está sendo usado')
         })

@@ -17,14 +17,7 @@ describe('Login', () => {
     })
 
     it('Usuário não encontrado', () => {
-        cy.request({
-            method:'GET',
-            url: 'https://serverest.dev/usuarios/0uxuPY0cbmQhpE22',
-            headers: {
-                accept: 'application/json',
-            },
-            failOnStatusCode: false
-        }).then((response) => {
+        cy.idIncorreto().then((response) => {
             expect(response.status).to.eq(400)
             expect(response.body).to.have.property('message', 'Usuário não encontrado')
         })

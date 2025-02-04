@@ -27,24 +27,9 @@ describe('Editar Usuário', () => {
     })
 
     it('Usuário com email já cadastrado', () => {
-        cy.request({
-            method: 'PUT',
-            url: 'https://serverest.dev/usuarios/8Y0eloYL6yOlOJpQ',
-            headers: {
-                accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: {
-                nome: 'Lara Santos',
-                email: 'Raul.Pereira@hotmail.com',
-                password: 'LMQmV9ORnFTVKCu',
-                administrador: 'true'
-            },
-            failOnStatusCode: false
-        }).then((response) => {
-            expect(response.status).to.equal(400)
+        cy.emailUsado().then((response) => {
+            expect(response.status).to.eq(400)
             expect(response.body).to.have.property('message', 'Este email já está sendo usado')
         })
-        
     })
 })    

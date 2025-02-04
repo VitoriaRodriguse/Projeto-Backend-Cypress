@@ -2,13 +2,13 @@ import { faker } from '@faker-js/faker/locale/pt_BR'
 
 Cypress.Commands.add('realizarLogin', (userData = null) => {
     const data = userData || {
-        email: 'Kleber.Xavier@bol.com.br',
-        password: 'Ik33bdzjvwf09EY',
+        email: 'fulano@qa.com',
+        password: 'teste',
     }
 
     return cy.request({
         method: 'POST',
-        url: 'https://serverest.dev/login',
+        url: '/login',
         headers: {
             accept: 'application/json',
             'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ Cypress.Commands.add('realizarLoginIncorreto', (userData = null) => {
 
     return cy.request({
         method: 'POST',
-        url: 'https://serverest.dev/login',
+        url: '/login',
         headers: {
             accept: 'application/json',
             'Content-Type': 'application/json'
@@ -49,7 +49,28 @@ Cypress.Commands.add('criarUsuario', (userData = null) => {
 
     return cy.request({
         method: 'POST',
-        url: 'https://serverest.dev/usuarios',
+        url: '/usuarios',
+        headers: {
+            accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: data,
+        failOnStatusCode: false
+    })
+})   
+
+
+Cypress.Commands.add('emailUsado', (userData = null) => {
+    const data = userData || {
+        nome: faker.person.fullName(),
+        email: 'Fabricio.Martins@gmail.com',
+        password: faker.internet.password(),
+        administrador: faker.datatype.boolean().toString()
+    }
+
+    return cy.request({
+        method: 'POST',
+        url: '/usuarios',
         headers: {
             accept: 'application/json',
             'Content-Type': 'application/json'
@@ -63,7 +84,7 @@ Cypress.Commands.add('criarUsuario', (userData = null) => {
 Cypress.Commands.add('listarUsuario', () => {
      cy.request({
         method: 'GET',
-        url: 'https://serverest.dev/usuarios',
+        url: '/usuarios',
         headers: {
             accept: 'application/json',
         },
@@ -75,12 +96,24 @@ Cypress.Commands.add('listarUsuario', () => {
 Cypress.Commands.add('listById', (userId) => {
      cy.request({
         method: 'GET',
-        url: `https://serverest.dev/usuarios/${userId}`,
+        url: `/usuarios/${userId}`,
         headers: {
             accept: 'application/json',
         },
         failOnStatusCode: false
     })
+})
+
+
+Cypress.Commands.add('idIncorreto', () => {
+    cy.request({
+       method: 'GET',
+       url: '/usuarios/asdfgg',
+       headers: {
+           accept: 'application/json',
+       },
+       failOnStatusCode: false
+   })
 })
 
 
@@ -94,7 +127,7 @@ Cypress.Commands.add('updateUser', (userId, userData = null) => {
 
     return cy.request({
         method: 'PUT',
-        url: `https://serverest.dev/usuarios/${userId}`,
+        url: `/usuarios/${userId}`,
         headers: {
             accept: 'application/json',
             'Content-Type': 'application/json'
@@ -108,7 +141,7 @@ Cypress.Commands.add('updateUser', (userId, userData = null) => {
 Cypress.Commands.add('listByIdDelete', (userId) => {
     cy.request({
        method: 'DELETE',
-       url: `https://serverest.dev/usuarios/${userId}`,
+       url: `/usuarios/${userId}`,
        headers: {
            accept: 'application/json',
            'Content-Type': 'application/json'
